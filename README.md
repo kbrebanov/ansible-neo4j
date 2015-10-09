@@ -1,6 +1,8 @@
 neo4j
 =====
 
+[![Ansible Role](https://img.shields.io/ansible/role/5472.svg)](https://galaxy.ansible.com/list#/roles/5472)
+
 Installs Neo4j
 
 Requirements
