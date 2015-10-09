@@ -13,7 +13,9 @@ This role requires Ansible 1.4 or higher.
 Role Variables
 --------------
 
-None
+| Name          | Default | Description                 |
+|---------------|---------|-----------------------------|
+| neo4j_version | 2.2.8   | Version of Neo4j to install |
 
 Dependencies
 ------------
