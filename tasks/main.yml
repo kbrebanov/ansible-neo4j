@@ -1,2 +1,88 @@
 ---
 # tasks file for neo4j
+
+- name: Include distribution specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
+  tags: neo4j
+
+- include: CentOS.yml
+  when: ansible_distribution == "CentOS"
+  tags: neo4j
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+  tags: neo4j
+
+- name: Create custom logback configuration file
+  template: >
+    src=custom-logback.xml.j2
+    dest={{ neo4j_config_dir }}/custom-logback.xml
+    owner={{ neo4j_user }}
+    group={{ neo4j_group }}
+    mode=0644
+  notify: restart neo4j
+  tags: neo4j
+
+- name: Create logging properties file
+  template: >
+    src=logging.properties.j2
+    dest={{ neo4j_config_dir }}/loggin.properties
+    owner={{ neo4j_user }}
+    group={{ neo4j_group }}
+    mode=0644
+  notify: restart neo4j
+  tags: neo4j
+
+- name: Create Neo4j HTTP logging configuration file
+  template: >
+    src=neo4j-http-logging.xml.j2
+    dest={{ neo4j_config_dir }}/neo4j-http-logging.xml
+    owner={{ neo4j_user }}
+    group={{ neo4j_group }}
+    mode=0644
+  notify: restart neo4j
+  tags: neo4j
+
+- name: Create Neo4j server properties file
+  template: >
+    src=neo4j-server.properties.j2
+    dest={{ neo4j_config_dir }}/neo4j-server.properties
+    owner={{ neo4j_user }}
+    group={{ neo4j_group }}
+    mode=0644
+  notify: restart neo4j
+  tags: neo4j
+
+- name: Create Neo4j wrapper configuration file
+  template: >
+    src=neo4j-wrapper.conf.j2
+    dest={{ neo4j_config_dir }}/neo4j-wrapper.conf
+    owner={{ neo4j_user }}
+    group={{ neo4j_group }}
+    mode=0644
+  notify: restart neo4j
+  tags: neo4j
+
+- name: Create Neo4j properties file
+  template: >
+    src=neo4j.properties.j2
+    dest={{ neo4j_config_dir }}/neo4j.properties
+    owner={{ neo4j_user }}
+    group={{ neo4j_group }}
+    mode=0644
+  notify: restart neo4j
+  tags: neo4j
+
+- name: Create windows wrapper logging properties file
+  template: >
+    src=windows-wrapper-logging.properties.j2
+    dest={{ neo4j_config_dir }}/windows-wrapper-logging.properties
+    owner={{ neo4j_user }}
+    group={{ neo4j_group }}
+    mode=0644
+  notify: restart neo4j
+  tags: neo4j
+
+- name: Ensure Neo4j service is started and enabled on boot
+  service: name={{ neo4j_service_name }} state=started enabled=yes
+  tags: neo4j

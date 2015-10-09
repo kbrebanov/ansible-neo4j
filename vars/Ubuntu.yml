@@ -1,0 +1,9 @@
+---
+# vars file for neo4j (Ubuntu specific)
+
+neo4j_packages:
+  - neo4j={{ neo4j_version }}
+neo4j_service_name: neo4j-service
+neo4j_config_dir: /etc/neo4j
+neo4j_user: neo4j
+neo4j_group: adm

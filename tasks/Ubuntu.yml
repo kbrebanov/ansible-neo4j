@@ -1,0 +1,19 @@
+---
+# tasks file for neo4j (Ubuntu specific)
+
+- name: Install Neo4j GPG signing key
+  apt_key: >
+    url=https://debian.neo4j.org/neotechnology.gpg.key
+    state=present
+  tags: neo4j
+
+- name: Add Neo4j repository
+  apt_repository: >
+    repo='deb http://debian.neo4j.org/repo stable/'
+    state=present
+  tags: neo4j
+
+- name: Install Neo4j packages
+  apt: name={{ item }} state=present update_cache=yes
+  with_items: neo4j_packages
+  tags: neo4j

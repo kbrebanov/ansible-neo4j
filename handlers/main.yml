@@ -1,2 +1,6 @@
 ---
 # handlers file for neo4j
+
+- name: restart neo4j
+  service: name={{ neo4j_service_name }} state=restarted
+  tags: neo4j
