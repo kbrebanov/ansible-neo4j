@@ -15,7 +15,7 @@ Role Variables
 
 | Name          | Default | Description                 |
 |---------------|---------|-----------------------------|
-| neo4j_version | 2.2.8   | Version of Neo4j to install |
+| neo4j_version | 2.3.1   | Version of Neo4j to install |
 
 Dependencies
 ------------
